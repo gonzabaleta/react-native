@@ -1,7 +1,14 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
 import theme from "../../constants/theme";
 
+const { width, height } = Dimensions.get("window");
+
 export const styles = StyleSheet.create({
+  containerGeneric: {
+    flex: 1,
+  },
+
   container: {
     flex: 1,
     alignItems: "center",
@@ -18,16 +25,17 @@ export const styles = StyleSheet.create({
     fontFamily: "open-sans",
   },
   inputContainer: {
-    width: 300,
-    maxWidth: "80%",
+    width: "80%",
+    maxWidth: "90%",
+    minWidth: width * 0.7,
     alignItems: "center",
     paddingVertical: 15,
   },
   buttonContainer: {
     flexDirection: "row",
-    width: "100%",
+    width: width * 0.625,
     justifyContent: "space-between",
-    paddingVertical: 15,
-    paddingHorizontal: 25,
+    paddingVertical: width > 600 ? 20 : 10,
+    // paddingHorizontal: 25,
   },
 });

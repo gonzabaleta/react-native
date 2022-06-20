@@ -1,6 +1,9 @@
 import {
   Button,
   Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
   Text,
   TouchableWithoutFeedback,
   View,
@@ -45,40 +48,48 @@ export default function StartGame({ setUserNumber }) {
   ) : null;
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}
+    <KeyboardAvoidingView
+      style={styles.containerGeneric}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={30}
     >
-      <View style={styles.container}>
-        <CustomText style={styles.title}>Comenzar Juego</CustomText>
-        <Card style={styles.inputContainer}>
-          <CustomText style={styles.subtitle}>Elija el número</CustomText>
-          <Input
-            placeholder="11"
-            keyboardType="numeric"
-            maxLength={2}
-            blurOnSubmit
-            autoCorrect={false}
-            style={styles.input}
-            value={number}
-            onChangeText={handleChange}
-          />
-          <View style={styles.buttonContainer}>
-            <Button
-              title="Limpiar"
-              color={theme.colors.secondary}
-              onPress={handleReset}
-            />
-            <Button
-              title="Confirmar"
-              color={theme.colors.secondary}
-              onPress={handleConfirm}
-            />
+      <TouchableWithoutFeedback
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <ScrollView style={styles.containerGeneric}>
+          <View style={styles.container}>
+            <CustomText style={styles.title}>Comenzar Juego</CustomText>
+            <Card style={styles.inputContainer}>
+              <CustomText style={styles.subtitle}>Elija el número</CustomText>
+              <Input
+                placeholder="11"
+                keyboardType="numeric"
+                maxLength={2}
+                blurOnSubmit
+                autoCorrect={false}
+                style={styles.input}
+                value={number}
+                onChangeText={handleChange}
+              />
+              <View style={styles.buttonContainer}>
+                <Button
+                  title="Limpiar"
+                  color={theme.colors.secondary}
+                  onPress={handleReset}
+                />
+                <Button
+                  title="Confirmar"
+                  color={theme.colors.secondary}
+                  onPress={handleConfirm}
+                />
+              </View>
+            </Card>
+            {confirmedOutput}
           </View>
-        </Card>
-        {confirmedOutput}
-      </View>
-    </TouchableWithoutFeedback>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
