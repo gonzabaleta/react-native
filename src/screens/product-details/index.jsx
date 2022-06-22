@@ -1,15 +1,12 @@
 import { Text, View } from "react-native";
 
-import CustomText from "../CustomText";
 import React from "react";
 import { styles } from "./styles";
 
-const Header = ({ title }) => {
+export default function ProductDetailsScreen() {
   return (
     <View style={styles.container}>
-      <CustomText style={styles.title}>{title}</CustomText>
+      <Text style={styles.texxt}>Product Details Screen</Text>
     </View>
   );
-};
-
-export default Header;
+}

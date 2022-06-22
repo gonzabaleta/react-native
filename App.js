@@ -1,55 +1,24 @@
-import { ActivityIndicator, SafeAreaView } from "react-native";
-
-import GameOver from "./screens/game-over";
-import GameScreen from "./screens/game-screen";
-import { Header } from "./components";
-import StartGame from "./screens/start-game";
-import { styles } from "./styles";
-import theme from "./constants/theme";
+import { ActivityIndicator } from "react-native";
+import Root from "./src/index";
 import { useFonts } from "expo-font";
-import { useState } from "react";
 
 export default function App() {
   const [loaded] = useFonts({
-    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+    "Lato-Regular": require("./src/assets/fonts/Lato-Regular.ttf"),
+    "Lato-Bold": require("./src/assets/fonts/Lato-Bold.ttf"),
+    "Lato-Italic": require("./src/assets/fonts/Lato-Italic.ttf"),
+    "Lato-BoldItalic": require("./src/assets/fonts/Lato-BoldItalic.ttf"),
+    "Lato-Light": require("./src/assets/fonts/Lato-Light.ttf"),
+    "Lato-LightItalic": require("./src/assets/fonts/Lato-LightItalic.ttf"),
+    "Lato-Black": require("./src/assets/fonts/Lato-Black.ttf"),
+    "Lato-BlackItalic": require("./src/assets/fonts/Lato-BlackItalic.ttf"),
+    "Lato-Thin": require("./src/assets/fonts/Lato-Thin.ttf"),
+    "Lato-ThinItalic": require("./src/assets/fonts/Lato-ThinItalic.ttf"),
   });
-  const [userNumber, setUserNumber] = useState("");
-  const [guessRounds, setGuessRounds] = useState(0);
-
-  let content = <StartGame setUserNumber={setUserNumber} />;
 
   if (!loaded) {
-    return <ActivityIndicator size="large" color={theme.colors.primary} />;
+    return <ActivityIndicator />;
   }
 
-  const handleGameOver = (rounds) => {
-    setGuessRounds(rounds);
-  };
-
-  const handleRestartGame = () => {
-    setGuessRounds(0);
-    setUserNumber(null);
-  };
-
-  if (userNumber && guessRounds <= 0) {
-    content = (
-      <GameScreen userNumber={userNumber} onGameOver={handleGameOver} />
-    );
-  } else if (guessRounds > 0) {
-    content = (
-      <GameOver
-        rounds={guessRounds}
-        onRestart={handleRestartGame}
-        choice={userNumber}
-      />
-    );
-  }
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <Header title="Adivina el número" />
-      {content}
-    </SafeAreaView>
-  );
+  return <Root />;
 }
