@@ -1,12 +1,21 @@
 import { Button, FlatList, Text, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 import { CategoryItem } from "../../components";
-import { categories } from "../../data/categories";
+import { selectCategory } from "../../store/actions/category.actions";
 import { styles } from "./styles";
 
 export default function CategoriesScreen({ navigation }) {
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.category.categories);
+  const categorySelected = useSelector((state) => state.category.selected);
+  const categoryProducts = useSelector(
+    (state) => state.product.filteredProducts
+  );
+
   const onSelected = (item) => {
-    navigation.navigate("Products", { categoryId: item.id, title: item.title });
+    dispatch(selectCategory(item.id));
+    navigation.navigate("Products", { title: item.title });
   };
 
   const renderItem = ({ item }) => (

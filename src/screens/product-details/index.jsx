@@ -1,12 +1,10 @@
 import { Text, View } from "react-native";
 
-import { products } from "../../data/products";
 import { styles } from "./styles";
+import { useSelector } from "react-redux";
 
-export default function ProductDetailsScreen({ route }) {
-  const { productId } = route.params;
-
-  const product = products.find((prod) => prod.id === productId);
+export default function ProductDetailsScreen() {
+  const product = useSelector((state) => state.product.selected);
 
   return (
     <View style={styles.container}>
