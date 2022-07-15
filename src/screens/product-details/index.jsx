@@ -1,10 +1,13 @@
-import { Text, View } from "react-native";
+import { Button, Text, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
+import { addItem } from "../../store/actions/cart.actions";
 import { styles } from "./styles";
-import { useSelector } from "react-redux";
 
 export default function ProductDetailsScreen() {
   const product = useSelector((state) => state.product.selected);
+
+  const addToCart = () => {};
 
   return (
     <View style={styles.container}>
@@ -13,6 +16,7 @@ export default function ProductDetailsScreen() {
       <Text style={styles.text}>{product.description}</Text>
       <Text style={styles.text}>{product.weight}</Text>
       <Text style={styles.text}>${product.price}</Text>
+      <Button title="Add to cart" />
     </View>
   );
 }

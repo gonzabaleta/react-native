@@ -10,18 +10,22 @@ const initialState = {
 };
 
 const productReducer = (state = initialState, action) => {
-  switch (state.action) {
+  switch (action.type) {
     case SELECT_PRODUCT:
       return {
         ...state,
         selected: state.products.find((prod) => prod.id === action.productId),
       };
     case FILTER_PRODUCTS:
+      const filteredProducts = state.products.filter(
+        (prod) => prod.categoryId === action.categoryId
+      );
+
+      console.log(filteredProducts);
+
       return {
         ...state,
-        filteredProducts: state.products.filter(
-          (prod) => prod.categoryId === action.categoryId
-        ),
+        filteredProducts,
       };
     default:
       return state;

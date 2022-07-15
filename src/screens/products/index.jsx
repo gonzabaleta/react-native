@@ -3,11 +3,11 @@ import {
   filterProducts,
   selectProduct,
 } from "../../store/actions/product.action";
+import { useDispatch, useSelector } from "react-redux";
 
 import ProductItem from "../../components/product-item";
 import { styles } from "./styles";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 
 export default function ProductsScreen({ navigation, route }) {
   const dispatch = useDispatch();
