@@ -1,3 +1,4 @@
+import { URL_API } from "../../constants/database/firebase";
 import { cart } from "../../data/cart";
 import { cartTypes } from "../types/cart.types";
 
@@ -13,7 +14,29 @@ export const removeItem = (id) => ({
   id,
 });
 
-export const confirmCart = () => ({
-  type: CONFIRM_CART,
-  payload,
-});
+export const confirmCart = (items, total) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${URL_API}/order.json`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          date: Date.now(),
+          items,
+          total,
+        }),
+      });
+
+      const result = await response.json();
+
+      dispatch({
+        type: CONFIRM_CART,
+        confirm: true,
+      });
+    } catch (err) {
+      console.log(error.message);
+    }
+  };
+};

@@ -1,8 +1,8 @@
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { confirmCart, removeItem } from "../../store/actions/cart.actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { CartItem } from "../../components";
-import { removeItem } from "../../store/actions/cart.actions";
 import { styles } from "./styles";
 
 export default function CartScreen() {
@@ -14,7 +14,7 @@ export default function CartScreen() {
   };
 
   const onHandlerConfirmCart = () => {
-    console.log("Confirm cart");
+    dispatch(confirmCart(cart, total));
   };
 
   const renderItem = ({ item }) => (

@@ -5,9 +5,12 @@ import { addItem } from "../../store/actions/cart.actions";
 import { styles } from "./styles";
 
 export default function ProductDetailsScreen() {
+  const dispatch = useDispatch();
   const product = useSelector((state) => state.product.selected);
 
-  const addToCart = () => {};
+  const addToCart = () => {
+    dispatch(addItem(product));
+  };
 
   return (
     <View style={styles.container}>
@@ -16,7 +19,7 @@ export default function ProductDetailsScreen() {
       <Text style={styles.text}>{product.description}</Text>
       <Text style={styles.text}>{product.weight}</Text>
       <Text style={styles.text}>${product.price}</Text>
-      <Button title="Add to cart" />
+      <Button title="Add to cart" onPress={addToCart} />
     </View>
   );
 }

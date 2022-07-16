@@ -7,8 +7,8 @@ const sumTotal = (list) =>
   list.map((item) => item.quantity * item.price).reduce((a, b) => a + b, 0);
 
 const initialState = {
-  items: cart,
-  price: 27000,
+  items: [],
+  price: 0,
 };
 
 const cartReducer = (state = initialState, action) => {
